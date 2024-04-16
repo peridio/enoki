@@ -4,18 +4,20 @@ defmodule PeridioSDK.Client do
             api_key: nil,
             adapter: nil,
             json_client: Jason,
-            org: nil
+            org: nil,
+            release_prn: nil,
+            release_version: nil
 
   def new(opts) do
     opts =
-      default_opts()
+      adapter_opts()
       |> Keyword.merge(opts)
-      |> Keyword.take([:admin_api_host, :device_api_host, :api_key, :adapter, :json_client, :org])
+      |> Keyword.take([:admin_api_host, :device_api_host, :api_key, :adapter, :json_client, :org, :release_prn, :release_version])
 
     struct!(__MODULE__, opts)
   end
 
-  defp default_opts() do
+  defp adapter_opts() do
     [
       adapter: {Tesla.Adapter.Mint, transport_opts: [cacertfile: cacertfile()]}
     ]

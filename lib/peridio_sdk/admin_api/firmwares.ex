@@ -34,11 +34,12 @@ defmodule PeridioSDK.AdminAPI.Firmwares do
     )
   end
 
-  def get(client, product_name, firmware_uuid) do
+  def get(client, product_name, firmware_uuid, expand \\ []) do
     HTTPClient.get(
       client,
       AdminAPI.middleware(client),
-      "/orgs/#{client.org}/products/#{product_name}/firmwares/#{firmware_uuid}"
+      "/orgs/#{client.org}/products/#{product_name}/firmwares/#{firmware_uuid}",
+      query: [expand: expand]
     )
   end
 
