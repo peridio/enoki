@@ -24,7 +24,7 @@ defmodule PeridioSDK.DeviceAPI.Tunnels do
     HTTPClient.patch(
       client,
       DeviceAPI.middleware(client),
-      "/tunnels/#{tunnel_prn}/update",
+      "/tunnels/#{tunnel_prn}",
       tunnel_data
     )
   end
