@@ -22,7 +22,6 @@ defmodule PeridioSDK.HTTPClient do
     client
     |> http_client(middleware)
     |> Tesla.get(path, opts)
-    |> IO.inspect()
     |> handle_response()
   end
 

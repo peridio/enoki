@@ -15,13 +15,12 @@ defmodule PeridioSDK.AdminAPI.BinaryParts do
     offset = index - 1
 
     middleware =
-      ([
-         {Tesla.Middleware.Headers,
-          [
-            {"content-range", "bytes #{offset * size}-#{index * size - 1}/#{total_bytes}"}
-          ]}
-       ] ++ AdminAPI.middleware(client))
-      |> IO.inspect()
+      [
+        {Tesla.Middleware.Headers,
+         [
+           {"content-range", "bytes #{offset * size}-#{index * size - 1}/#{total_bytes}"}
+         ]}
+      ] ++ AdminAPI.middleware(client)
 
     HTTPClient.put(client, middleware, "/binaries/#{binary_prn}/parts/#{index}", binary_part_data)
   end
