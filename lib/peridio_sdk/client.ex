@@ -12,7 +12,16 @@ defmodule PeridioSDK.Client do
     opts =
       adapter_opts()
       |> Keyword.merge(opts)
-      |> Keyword.take([:admin_api_host, :device_api_host, :api_key, :adapter, :json_client, :org, :release_prn, :release_version])
+      |> Keyword.take([
+        :admin_api_host,
+        :device_api_host,
+        :api_key,
+        :adapter,
+        :json_client,
+        :org,
+        :release_prn,
+        :release_version
+      ])
 
     struct!(__MODULE__, opts)
   end
