@@ -1,14 +1,23 @@
 defmodule PeridioSDK.DeviceAPI do
   def middleware(config) do
+    headers = [{"User-Agent", "peridio/peridio-sdk-elixir@#{PeridioSDK.version()}"}]
+
+    headers =
+      case config.release_prn do
+        nil -> headers
+        release_prn -> [{"peridio-release-prn", release_prn} | headers]
+      end
+
+    headers =
+      case config.release_version do
+        nil -> headers
+        release_version -> [{"peridio-release-version", release_version} | headers]
+      end
+
     [
       {Tesla.Middleware.BaseUrl, config.device_api_host},
       {Tesla.Middleware.JSON, engine: config.json_client},
-      {Tesla.Middleware.Headers,
-       [
-         {"peridio-release-prn", config.release_prn},
-         {"peridio-release-version", config.release_version},
-         {"User-Agent", "peridio/peridio-sdk-elixir@#{PeridioSDK.version()}"}
-       ]}
+      {Tesla.Middleware.Headers, headers}
     ]
   end
 end
