@@ -8,9 +8,11 @@ defmodule PeridioSDK.Client do
             release_prn: nil,
             release_version: nil
 
+  @default_timeout 10_000
+
   def new(opts) do
     opts =
-      adapter_opts()
+      adapter_opts(opts)
       |> Keyword.merge(opts)
       |> Keyword.take([
         :admin_api_host,
@@ -26,9 +28,10 @@ defmodule PeridioSDK.Client do
     struct!(__MODULE__, opts)
   end
 
-  defp adapter_opts() do
+  defp adapter_opts(opts) do
+    timeout = opts[:timeout] || @default_timeout
     [
-      adapter: {Tesla.Adapter.Mint, transport_opts: [cacertfile: cacertfile()]}
+      adapter: {Tesla.Adapter.Mint, timeout: timeout, transport_opts: [cacertfile: cacertfile()]}
     ]
   end
 
