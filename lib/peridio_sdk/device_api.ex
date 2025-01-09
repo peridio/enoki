@@ -14,6 +14,12 @@ defmodule PeridioSDK.DeviceAPI do
         release_version -> [{"peridio-release-version", release_version} | headers]
       end
 
+    headers =
+      case config.bundle_prn do
+        nil -> headers
+        bundle_prn -> [{"peridio-bundle-prn", bundle_prn} | headers]
+      end
+
     [
       {Tesla.Middleware.BaseUrl, config.device_api_host},
       {Tesla.Middleware.JSON, engine: config.json_client},

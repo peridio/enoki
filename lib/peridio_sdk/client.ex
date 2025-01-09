@@ -20,6 +20,7 @@ defmodule PeridioSDK.Client do
         :json_client,
         :org,
         :release_prn,
+        :bundle_prn,
         :release_version
       ])
 
