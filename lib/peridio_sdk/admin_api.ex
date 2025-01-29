@@ -5,8 +5,8 @@ defmodule PeridioSDK.AdminAPI do
       {Tesla.Middleware.JSON, engine: config.json_client},
       {Tesla.Middleware.Headers,
        [
-         {"Authorization", "Token " <> config.api_key},
-         {"User-Agent", "peridio/peridio-sdk-elixir@#{PeridioSDK.version()}"}
+         {"User-Agent", config.user_agent},
+         {"Authorization", "Token " <> config.api_key}
        ]}
     ]
   end

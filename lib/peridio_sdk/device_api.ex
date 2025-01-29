@@ -1,6 +1,6 @@
 defmodule PeridioSDK.DeviceAPI do
   def middleware(config) do
-    headers = [{"User-Agent", "peridio/peridio-sdk-elixir@#{PeridioSDK.version()}"}]
+    headers = [{"User-Agent", config.user_agent}]
 
     headers =
       case config.release_prn do
